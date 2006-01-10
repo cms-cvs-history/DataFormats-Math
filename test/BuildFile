@@ -1,4 +1,3 @@
 <bin name="testDataFormatsMath_dict" file="test_dict.cpp ">
   <use name=DataFormats/Math>
-  <lib name=lcg_Cintex>
 </bin>
