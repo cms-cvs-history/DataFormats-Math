@@ -1,0 +1,4 @@
+<library file="ReadMath.cc,WriteMath.cc,SealModule.cc" name=DataFormatsMath_test>
+  <use name=FWCore/Framework>
+  <flags SEAL_PLUGIN_NAME="DataFormatsMath_test">
+</library>
