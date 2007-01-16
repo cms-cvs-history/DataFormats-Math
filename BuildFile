@@ -1,10 +1,11 @@
 <use name=DataFormats/Common>
-<use name=relax>
-<use name=rootmath>
 <use name=rootrflx>
+<use name=rootmath>
+<use name=relax>
 <export>
-  <use name=DataFormats/Common>
-  <use name=rootmath>
-  <lib name=DataFormatsMath>
+ <lib name=DataFormatsMath>
+ <use name=DataFormats/Common>
+ <use name=rootrflx>
+ <use name=rootmath>
+ <use name=relax>
 </export>
-
