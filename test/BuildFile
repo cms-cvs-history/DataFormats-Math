@@ -2,5 +2,5 @@
   <use name=DataFormats/Math>
   <use name=FWCore/Framework>
   <use name=DataFormats/Common>
-  <flags SEAL_PLUGIN_NAME="DataFormatsMath_test">
+  <flags EDM_PLUGIN=1>
 </library>
