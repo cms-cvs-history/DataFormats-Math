@@ -4,3 +4,6 @@
   <use name=DataFormats/Common>
   <flags EDM_PLUGIN=1>
 </library>
+<use name=rootmath>
+<bin file="Matrices_t.cpp" name="DataFormatsMatrices_t">
+<Flags CXXFLAGS="-O3 -msse4 -mfpmath=sse -ftree-vectorize -fassociative-math -funsafe-math-optimizations  -ftree-vectorizer-verbose=7">
