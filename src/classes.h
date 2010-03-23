@@ -210,12 +210,22 @@ namespace {
     ROOT::Math::RowOffsets<6> ro6;
     ROOT::Math::RowOffsets<7> ro7;
 
+    //     ROOT::Math::SymMatrixOffsets<1> symo1;
+    ROOT::Math::SymMatrixOffsets<2> symo2;
+    ROOT::Math::SymMatrixOffsets<3> symo3;
+    ROOT::Math::SymMatrixOffsets<4> symo4;
+    ROOT::Math::SymMatrixOffsets<5> symo5;
+    ROOT::Math::SymMatrixOffsets<6> symo6;
+    ROOT::Math::SymMatrixOffsets<7> symo7;
+
     //Used by ECAL Weights reconstruction
     //Used by ECAL Weights reconstruction
     math::Matrix<3,10>::type mw; 
     math::Matrix<10,10>::type mcw; 
+    math::Matrix<2,3>::type mw1;
     ROOT::Math::MatRepStd<double, 3 ,10> smdw;
     ROOT::Math::MatRepStd<double, 10 , 10> smdcw;
+    ROOT::Math::MatRepStd<double, 2 , 3> smdcw1;
 
     //Used by TauReco
     std::pair<ROOT::Math::PositionVector3D<ROOT::Math::Cartesian3D<double>,ROOT::Math::DefaultCoordinateSystemTag>,float> calotti_ppf;
