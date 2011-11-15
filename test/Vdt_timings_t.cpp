@@ -11,7 +11,7 @@
 #include <cmath>
 #include <memory>
 #include <string>
-#include "DataFormats/Math/interface/vdt_math.h"
+#include "DataFormats/Math/interface/VDTMath.h"
 
 
 void test_input(int argc, char** argv);
