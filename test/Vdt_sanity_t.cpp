@@ -6,6 +6,9 @@
 
 #include <cmath>
 #include <stdlib.h>
+
+#include "TRandom3.h"
+
 #include "DataFormats/Math/interface/VDTMath.h"
 
 //------------------------------------------------------------------------------
@@ -35,7 +38,8 @@ bool check_dp(double arg, double a, double b);
 
 const double MAX_RND_EXP = vdt::EXP_LIMIT;
 const double MIN_RND_LOG = vdt::LOG_LOWER_LIMIT;
-const double MAX_RND_LOG = 1e200;
+const double MAX_RND_LOG = vdt::LOG_UPPER_LIMIT;
+const double MAX_RND_SIN = vdt::SIN_LIMIT;
 const double EPSILON = 1e-5;
 
 int main(int argc, char** argv){
@@ -47,7 +51,7 @@ int main(int argc, char** argv){
   vdt::print_instructions_info();
   
   // Fill a vector of random numbers
-  int n_rnd_numbers = 10000;
+  int n_rnd_numbers = 10000000;
   if (argc>=2)
     n_rnd_numbers = atoi(argv[1]);
 
@@ -60,7 +64,7 @@ int main(int argc, char** argv){
   // Generate the random numbers
   generate_rndm_numbers(rnd_numbers,n_rnd_numbers,-MAX_RND_EXP, MAX_RND_EXP);
 
-  // Test the timings
+  // Test the sanity
   test_simple_function(rnd_numbers,n_rnd_numbers, 
                        "vdt::fast_exp", vdt::fast_exp, "std::exp", std::exp);  
   test_vector_function(rnd_numbers,n_rnd_numbers, 
@@ -73,8 +77,14 @@ int main(int argc, char** argv){
                        "vdt::fast_log", vdt::fast_log, "std::log", std::log);  
   test_vector_function(rnd_numbers,n_rnd_numbers, 
                        "vdt::fast_log_vect", vdt::fast_log_vect, "vdt::std_log_vect", vdt::std_log_vect);  
-//   test_vector_function(rnd_numbers,n_rnd_numbers, 
-//                        "vdt::__future_fast_log_vect", vdt::__future_fast_log_vect, "vdt::std_log_vect", vdt::std_log_vect );
+  test_vector_function(rnd_numbers,n_rnd_numbers, 
+                       "vdt::__future_fast_log_vect", vdt::__future_fast_log_vect, "vdt::std_log_vect", vdt::std_log_vect );
+
+  generate_rndm_numbers(rnd_numbers,n_rnd_numbers,-MAX_RND_SIN, MAX_RND_SIN);
+  test_simple_function(rnd_numbers,n_rnd_numbers,
+                       "vdt::fast_sin", vdt::fast_sin, "std::sin", std::sin  );                           
+  test_simple_function(rnd_numbers,n_rnd_numbers,
+                       "vdt::fast_cos", vdt::fast_cos, "std::cos", std::cos  );
 
   delete[] rnd_numbers;
   
@@ -84,16 +94,14 @@ int main(int argc, char** argv){
 //------------------------------------------------------------------------------
   
 void generate_rndm_numbers(double* rnd_numbers,const unsigned int n_rnd_numbers,double min, double max){
-
-  double norm_rnd=0;
-  double rnd_delta = 0;   
-  for (unsigned int i=0;i<n_rnd_numbers;++i){  
-    norm_rnd = rand()/double(RAND_MAX);
-    rnd_delta = norm_rnd * (max - min);        
-    rnd_numbers[i] = min + rnd_delta;
+/**
+ * Generate between -MAX_RND and MAX_RND double numbers
+ **/
+  TRandom3 rndgen;
+  for (unsigned int i=0;i<n_rnd_numbers;++i){      
+    rnd_numbers[i] = rndgen.Uniform(min,max);
+    //std::cout << "o " << rnd_numbers[i] << std::endl;
   }
-  std::cout << "\n*** " << n_rnd_numbers 
-            << " numbers (" << min << "," << max<< ")\n";
 
   }
 
