@@ -1,12 +1,13 @@
 #ifndef DataFormat_Math_SSEVec_H
 #define DataFormat_Math_SSEVec_H
 
-#if defined(__GNUC__) && (__GNUC__ == 4) && (__GNUC_MINOR__ > 4)
+#if !defined(__arm__) 
+#if defined(__GNUC__) && (__GNUC__ == 4) && (__GNUC_MINOR__ > 4) 
 #include <x86intrin.h>
 #define CMS_USE_SSE
 #ifdef __AVX__
 #define CMS_USE_AVX
-#endif
+#endif /* __AVX__ */
 #else
 
 #ifdef __SSE2__
@@ -14,15 +15,16 @@
 
 #include <mmintrin.h>
 #include <emmintrin.h>
-#endif
+#endif /* __SSE2__ */
 #ifdef __SSE3__
 #include <pmmintrin.h>
-#endif
+#endif /* __SSE3__ */
 #ifdef __SSE4_1__
 #include <smmintrin.h>
-#endif
+#endif /* __SSE4_1__ */
 
-#endif
+#endif /* defined(__GNUC__) && (__GNUC__ == 4) && (__GNUC_MINOR__ > 4) */
+#endif /* !defined(__arm__) */
 
 #include<cmath>
 
